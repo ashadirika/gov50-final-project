@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/header-attrs-2.17/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["Data/Final Project.RData","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1517,8 +1517,18 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
-<h2 id="project-thoughts">Project thoughts</h2>
+<h2 id="milestone-1-initial-project-thoughts">Milestone 1: Initial Project Thoughts</h2>
 <p>I am interested in exploring data related to the incarceration of certain demographic groups– namely looking at trends that exist for marginalized and economically disadvantaged groups.</p>
+<h2 id="milestone-2-data-source-and-question-proposal">Milestone 2: Data Source and Question Proposal</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/base/load.html'>load</a></span><span class='op'>(</span><span class='st'>"/Users/ashleyadirika/Downloads/HawesSPPQ_ReplicationData.RData"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>FinalProjectData</span> <span class='op'>&lt;-</span> <span class='va'>table</span></span></code></pre>
+</div>
+</div>
+<p>The question that my final project will seek to answer is “What is the relationship between Black/White poverty inequality and the Black/White incarceration ratio in the United States?” I hypothesize that in states with high poverty inequality between white and Black populations, there is a disproportionate number of Black people incarcerated compared to their white counterparts.</p>
+<p>To test this hypothesis, I will be using data published by Daniel Hawes entitled “Replication Data for: Social Capital, Racial Context and Incarcerations in the American States.” In doing so, I plan to take the average Black/White poverty rate for each state provided in the dataset across the thirty-year data collection period. The average Black/White poverty rate will serve as my independent variable. Then, I will look at the average Black/White incarnation ratio for these states. To contextualize my understanding of these values, I will also utilize demographic information in the dataset that concerns state population size (and the racial breakdowns of these populaces) and total prison populations (and their racial breakdowns).</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
