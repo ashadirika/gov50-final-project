@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["Data/Final Project.RData","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["Data/Final Project.RData","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1528,8 +1528,60 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 </div>
 <p>The question that my final project will seek to answer is “What is the relationship between Black/White poverty inequality and the Black/White incarceration ratio in the United States?” I hypothesize that in states with high poverty inequality between white and Black populations, there is a disproportionate number of Black people incarcerated compared to their white counterparts.</p>
-<p>To test this hypothesis, I will be using data published by Daniel Hawes entitled “Replication Data for: Social Capital, Racial Context and Incarcerations in the American States.” In doing so, I plan to take the average Black/White poverty rate for each state provided in the dataset across the thirty-year data collection period. The average Black/White poverty rate will serve as my independent variable. Then, I will look at the average Black/White incarnation ratio for these states. To contextualize my understanding of these values, I will also utilize demographic information in the dataset that concerns state population size (and the racial breakdowns of these populaces) and total prison populations (and their racial breakdowns).</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>To test this hypothesis, I will be using data published by Daniel Hawes entitled “Replication Data for: Social Capital, Racial Context and Incarcerations in the American States.” In doing so, I plan to take the average Black/White poverty rate for each state provided in the dataset across the thirty-year data collection period. The average Black/White poverty rate will serve as my independent variable. Then, I will look at the average Black/White incarceration ratio for these states. To contextualize my understanding of these values, I will also utilize demographic information in the dataset that concerns state population size (and the racial breakdowns of these populaces) and total prison populations (and their racial breakdowns).</p>
+<h2 id="milestone-3">Milestone 3</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://dplyr.tidyverse.org'>dplyr</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>FinalProjectData</span></span></code></pre>
+</div>
+<pre><code># A tibble: 1,581 × 32
+   statename  year  fips fipsyear VCRate_Total PCRate_Total
+   &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
+ 1 Alabama    1980     1    11980          NA           NA 
+ 2 Alabama    1981     1    11981          NA           NA 
+ 3 Alabama    1982     1    11982          NA           NA 
+ 4 Alabama    1983     1    11983          NA           NA 
+ 5 Alabama    1984     1    11984          NA           NA 
+ 6 Alabama    1985     1    11985          NA           NA 
+ 7 Alabama    1986     1    11986         558         3730.
+ 8 Alabama    1987     1    11987         559.        3892.
+ 9 Alabama    1988     1    11988         559.        4003.
+10 Alabama    1989     1    11989         591.        4037 
+# ℹ 1,571 more rows
+# ℹ 26 more variables: divorcerate &lt;dbl&gt;, women_leg &lt;dbl&gt;,
+#   SC8609_ma &lt;dbl&gt;, pop_pctblk &lt;dbl&gt;, felonspc &lt;dbl&gt;,
+#   bwpovratio &lt;dbl&gt;, bwcolratio &lt;dbl&gt;, pov_rtfull &lt;dbl&gt;,
+#   unemp &lt;dbl&gt;, govideo &lt;dbl&gt;, totdempct &lt;dbl&gt;,
+#   racialdiversity &lt;dbl&gt;, gsppc_k &lt;dbl&gt;, eduattain_ma &lt;dbl&gt;,
+#   SC_RD &lt;dbl&gt;, jprison_totalrt &lt;dbl&gt;, prison_whtrt &lt;dbl&gt;, …</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='co'>##Independent Variable is average Black/ White poverty rate (bwpovratio)</span></span>
+<span></span>
+<span><span class='co'>## Dependent Variable is average Black/White Incarceration Ratio (prison_BWratio)</span></span>
+<span></span>
+<span></span>
+<span><span class='va'>Data_Visual_1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>FinalProjectData</span>, </span>
+<span>                       mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>bwpovratio</span>, </span>
+<span>                                     y <span class='op'>=</span> <span class='va'>prison_BWratio</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span> method <span class='op'>=</span> <span class='st'>"lm"</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_log10</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> </span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span> x <span class='op'>=</span> <span class='st'>"Average Poverty Inequality (Black/White Ratio)"</span>,</span>
+<span>        y <span class='op'>=</span> <span class='st'>"Average Black/White Incarceration Ratio"</span>,</span>
+<span>        title <span class='op'>=</span> <span class='st'>"Poverty Inequality and Incarceration Ratio"</span>,</span>
+<span>        subtitle <span class='op'>=</span> <span class='st'>"Across the United States"</span>, </span>
+<span>        caption <span class='op'>=</span> <span class='st'>"Source: Hawes, Daniel, 2017"</span><span class='op'>)</span></span>
+<span></span>
+<span>  </span>
+<span><span class='va'>Data_Visual_1</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-2-1.png" width="624" /></p>
+</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

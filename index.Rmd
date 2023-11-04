@@ -29,10 +29,43 @@ FinalProjectData <- table
 
 The question that my final project will seek to answer is “What is the relationship between Black/White poverty inequality and the Black/White incarceration ratio in the United States?” I hypothesize that in states with high poverty inequality between white and Black populations, there is a disproportionate number of Black people incarcerated compared to their white counterparts. 
 
-To test this hypothesis, I will be using data published by Daniel Hawes entitled “Replication Data for: Social Capital, Racial Context and Incarcerations in the American States." In doing so, I plan to take the average Black/White poverty rate for each state provided in the dataset across the thirty-year data collection period. The average Black/White poverty rate will serve as my independent variable. Then, I will look at the average Black/White incarnation ratio for these states. To contextualize my understanding of these values, I will also utilize demographic information in the dataset that concerns state population size (and the racial breakdowns of these populaces) and total prison populations (and their racial breakdowns).  
+To test this hypothesis, I will be using data published by Daniel Hawes entitled “Replication Data for: Social Capital, Racial Context and Incarcerations in the American States."  In doing so, I plan to take the average Black/White poverty rate for each state provided in the dataset across the thirty-year data collection period. The average Black/White poverty rate will serve as my independent variable. Then, I will look at the average Black/White incarceration ratio for these states. To contextualize my understanding of these values, I will also utilize demographic information in the dataset that concerns state population size (and the racial breakdowns of these populaces) and total prison populations (and their racial breakdowns).  
+
+
+## Milestone 3
+
+```{r}
+ 
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+
+FinalProjectData
+
+##Independent Variable is average Black/ White poverty rate (bwpovratio)
+
+## Dependent Variable is average Black/White Incarceration Ratio (prison_BWratio)
+
+
+Data_Visual_1 <- ggplot(data = FinalProjectData, 
+                       mapping = aes(x = bwpovratio, 
+                                     y = prison_BWratio)) + 
+  geom_point() + 
+  geom_smooth( method = "lm", se = FALSE) +
+  scale_x_log10() + 
+  labs( x = "Average Poverty Inequality (Black/White Ratio)",
+        y = "Average Black/White Incarceration Ratio",
+        title = "Poverty Inequality and Incarceration Ratio",
+        subtitle = "Across the United States", 
+        caption = "Source: Hawes, Daniel, 2017")
+
+  
+Data_Visual_1
 
 
 
 
+
+```
 
 
