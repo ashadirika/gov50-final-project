@@ -7,7 +7,7 @@ output:
     self_contained: false
 ---
 
-##Introduction: 
+Introduction: 
 
 The question that my final project will seek to answer is “What is the relationship between the amount of Black state legislatures in office and the Black/White Prison Ratio across states in 2008?” I hypothesize that the more Black state legislatures are in office for a given state, the lower the Black/White Prison Ratio will be. 
 
@@ -57,7 +57,7 @@ state_summary
 ```
 
 
-##Data section: 
+Data section: 
 
 In order to get a base look at what the relationship between the average percentage of Black State legislatures in Office and the average Black/White Prison Ratio from rach state from 1980 - 2010 was, I created a smoothed curve to summarize the relationship between the two variables. 
 
@@ -78,8 +78,7 @@ Based on this preliminary view of the data, there appears to be an overall negat
 
 
 
-##Results
-
+Results
 
 ```{r}
 
@@ -152,6 +151,7 @@ pop.fit <- lm(avg_prison_BWratio ~ avg_blk_leg +  avg_pop_pctblk + avg_racialdiv
 summary(pop.fit)
 
 
+
 ```
 
 
@@ -205,7 +205,7 @@ None of the values are statistically significant. This means that we cannot conc
 
 
 
-##Conclusion: 
+Conclusion: 
 
 Ultimately, the data demonstrates that there is a weak negative correlation between Black representation in the state legislature and Black/White prison ratios. When I ran the multiple regression table to control for the Black population and Diversity Index, the coefficients were not statistically significant. This is because the p-values were all less than 0.05. 
 
