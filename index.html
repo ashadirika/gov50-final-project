@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["Data/Final Project.RData","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/figure-html5/unnamed-chunk-5-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["Data/Final Project.RData","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/figure-html5/unnamed-chunk-5-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.24/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/kePrint-0.0.1/kePrint.js","index_files/lightable-0.0.1/lightable.css","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1644,7 +1644,8 @@ Residual standard error: 3.93 on 1484 degrees of freedom
 Multiple R-squared:  0.03795,   Adjusted R-squared:  0.03666 
 F-statistic: 29.27 on 2 and 1484 DF,  p-value: 3.4e-13</code></pre>
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>pop.fit</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='va'>pop.fit</span>, statistic <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"s.e. = {std.error}"</span>,</span>
+<span><span class='st'>"p = {p.value}"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
 </div>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
@@ -1669,7 +1670,14 @@ F-statistic: 29.27 on 2 and 1484 DF,  p-value: 3.4e-13</code></pre>
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-(0.215)
+s.e. = 0.215
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+p = &lt;0.001
 </td>
 </tr>
 <tr>
@@ -1684,7 +1692,14 @@ blk_leg
 <td style="text-align:left;">
 </td>
 <td style="text-align:center;">
-(0.020)
+s.e. = 0.020
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+p = 0.060
 </td>
 </tr>
 <tr>
@@ -1696,10 +1711,17 @@ racialdiversity
 </td>
 </tr>
 <tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+s.e. = 0.762
+</td>
+</tr>
+<tr>
 <td style="text-align:left;box-shadow: 0px 1.5px">
 </td>
 <td style="text-align:center;box-shadow: 0px 1.5px">
-(0.762)
+p = &lt;0.001
 </td>
 </tr>
 <tr>
@@ -1728,6 +1750,30 @@ R2 Adj.
 </tr>
 <tr>
 <td style="text-align:left;">
+AIC
+</td>
+<td style="text-align:center;">
+8295.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BIC
+</td>
+<td style="text-align:center;">
+8316.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Log.Lik.
+</td>
+<td style="text-align:center;">
+−4143.671
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 RMSE
 </td>
 <td style="text-align:center;">
@@ -1742,9 +1788,9 @@ RMSE
 <p>The “racialdiversity” [Racial Diversity Index] coefficient of (-3.84840) represents the estimated change in the average black/white prison ratio for every unit increase in the racial diversity index. That is, for every unit increase in the racial diversity index, there is an estimated decrease of -3.84840 points in the Black/White incarceration ratio in states. This relationship is statistically significant. This is because the p-value of the coefficient (4.99e-07) is less than 0.05.</p>
 <p>This information leads me to conclude that perhaps racial diversity is a better indicator for trends in Black/White prison ratios than the percentage of Black Legislature. This is because the statistical significance in the prior is much stronger.</p>
 <h2 id="conclusion">Conclusion:</h2>
-<p>Ultimately, the data demonstrates that there is a weak negative correlation between Black representation in the state legislature and Black/White prison ratios. This is based on the correlation value being “-0.1463755”. Which, while negative, is not very strong.</p>
+<p>Ultimately, the data demonstrates that there is a weak negative correlation between Black representation in the state legislature and Black/White prison ratios. This is based on the correlation value being “-0.1463755”. Which, while negative, is not very strong. This runs contrary to my initial hypothesis.</p>
 <p>When I ran the multiple regression table to control for the Diversity Index of states, the subsequent coefficients were statistically significant. Intuitively, it makes sense that an increase in diversity index would have a negative relationship with Black/White incarceration ratios. This is because more diversity means more heterogeneity in a given state’s populace, and thus, based on the data – a diversity in the races of people who end up incarcerated in prison.</p>
-<p>With this understanding, we cannot interpret the data as causal. That is, the presence of more Black State Legislatures does not cause a decrease in Black/White incarceration ratios. Instead, the data indicates that there is a fairly weak correlation. Similar understandings can be applied to the relationship between racial diversity and Black/White prison ratios. Though the two variables are correlated and the relationship is statistically significant, this does not mean causation.</p>
+<p>With this understanding, we cannot interpret the relationship… (ADD) data as causal. That is, the presence of more Black State Legislatures does not cause a decrease in Black/White incarceration ratios. Instead, the data indicates that there is a fairly weak correlation. Similar understandings can be applied to the relationship between racial diversity and Black/White prison ratios. Though the two variables are correlated and the relationship is statistically significant, this does not mean causation.</p>
 <p>In addition to what has already been considered, a potential confounding variable is the ideology of voters in a given state. That is, if voters are more “tough on crime” in one state, it is likely to impact the amount of people incarcerated on the whole. If the voters in this same state also hold racist or anti-diversity sentiments, it is likely that they have larger Black/White incarceration ratios. This is because voters elect officials who create policy that is supported by their constituents. This is something that the current data I am working with, cannot account for and thus, a limitation.</p>
 <p>Given more time and money to conduct this research, I would have liked to find data about the dominant voter ideologies of each state I was working with. I could leverage this information to control for the prior-mentioned confounding variables, or even observe beyond speculation what the relationship between voter ideology and Black/white incarceration actually is.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
