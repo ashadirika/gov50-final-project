@@ -19,6 +19,13 @@ To test my hypothesis, I used data published by Daniel Hawes entitled “Replica
 
 This data was pulled from a longitudinal study, that examined the “differential effects of social capital on policy equity in state outcomes” (Hawes, 2017) by looking at several variables like unemployment, black/white poverty ratios, black/white incarceration ratios in each state from 1980 until 2010. For my final project, I decided to calculate the average percentage of Black State Legislatures in Office and the average Black/White Prison Ratio from each state from 1980 until 2010 and look at the relationship between those values. This became my base data with which I conducted all of my analyses. It is important to note that the District of Columbia had missing data for both of these variables from 1980 until 2010, so DC will not be represented in my analysis. 
 
+```{r}
+library(readr)
+library(gapminder)
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+```
 
 
 ## Project Data: Data from all Years - Grouped by State 
