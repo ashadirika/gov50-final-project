@@ -7,7 +7,11 @@ output:
     self_contained: false
 ---
 
-Introduction: 
+# The Relationship between the Amount of Black State Legislatures and the Black/White Prison Ratio 
+
+
+
+## Introduction: 
 
 The question that my final project will seek to answer is “What is the relationship between the amount of Black state legislatures in office and the Black/White Prison Ratio across states in 2008?” I hypothesize that the more Black state legislatures are in office for a given state, the lower the Black/White Prison Ratio will be. 
 
@@ -17,7 +21,7 @@ This is a very important area of research given that in the status quo, Black pe
 
 To test my hypothesis, I used data published by Daniel Hawes entitled “Replication Data for: Social Capital, Racial Context and Incarcerations in the American States."
 
-This data was pulled from a longitudinal study, that examined the “differential effects of social capital on policy equity in state outcomes” (Hawes, 2017) by looking at several variables like unemployment, black/white poverty ratios, black/white incarceration ratios in each state from 1980 until 2010. For my final project, I decided to calculate the average percentage of Black State Legislatures in Office and the average Black/White Prison Ratio from each state from 1980 until 2010 and look at the relationship between those values. This became my base data with which I conducted all of my analyses. It is important to note that the District of Columbia had missing data for both of these variables from 1980 until 2010, so DC will not be represented in my analysis. 
+This data was pulled from a longitudinal study, that examined the “differential effects of social capital on policy equity in state outcomes” (Hawes, 2017) by looking at several variables like unemployment, black/white poverty ratios, black/white incarceration ratios in each state from 1980 until 2010. For my final project, I decided to examine the Black State Legislatures in Office and the average Black/White Prison Ratio from each state from 1980 until 2010 and look at the relationship between those values. This became my base data with which I conducted all of my analyses. It is important to note that the District of Columbia had missing data for both of these variables from 1980 until 2010, so DC will not be represented in my analysis. 
 
 ```{r}
 library(readr)
@@ -25,6 +29,8 @@ library(gapminder)
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
+library(knitr)
+library(kableExtra)
 
 ```
 
@@ -42,11 +48,13 @@ Project Data: Data from all Years - Grouped by State
 
 state_summary <- FinalProjectData |> 
   group_by(statename) |> 
-  summarize( 
-    avg_blk_leg = mean(blk_leg, na.rm = TRUE),
-    avg_prison_BWratio = mean(prison_BWratio, na.rm = TRUE)
+  reframe( 
+    blk_leg = blk_leg, 
+    prison_BWratio = prison_BWratio, 
+    racialdiversity = racialdiversity
   ) |> 
-  drop_na(avg_blk_leg, avg_prison_BWratio)
+  drop_na(blk_leg, prison_BWratio, racialdiversity) 
+
 
 state_summary 
 
@@ -57,39 +65,42 @@ state_summary
 ```
 
 
-Data section: 
-
-In order to get a base look at what the relationship between the average percentage of Black State legislatures in Office and the average Black/White Prison Ratio from rach state from 1980 - 2010 was, I created a smoothed curve to summarize the relationship between the two variables. 
+## Data section: 
 
 
-Summarize/Visualize the Dependent Variable - Smoothed Curve
 ```{r}
 
 ggplot(data = state_summary,
-       mapping = aes(x = avg_blk_leg,
-                     y = avg_prison_BWratio)) +
+       mapping = aes(x = blk_leg,
+                     y = prison_BWratio)) +
   geom_point() + geom_smooth()
 
 
 
 ```
 
-Based on this preliminary view of the data, there appears to be an overall negative relationship between the two variables. However, the trend appears to increase a bit before decreasing. This is perhaps an early indication that the relationships between the two variables are not incredibly strong. 
+In order to get a base look at what the relationship between the percentage of Black State legislatures in Office and the Black/White Prison Ratio from each state from 1980 - 2010 was, I created a smoothed curve to summarize the relationship between the two variables. 
+
+
+Based on this preliminary view of the data, there appears to be an overall negative relationship between the two variables. However, the trend appears to fluctuate. This is perhaps an early indication that the relationships between the two variables are not incredibly strong. 
 
 
 
-Results
+
+
+
+## Results
 
 ```{r}
 
 Data_Visual_1.6 <- ggplot(data = state_summary, 
-                       mapping = aes(x = avg_blk_leg, 
-                                     y = avg_prison_BWratio)) + 
+                       mapping = aes(x = blk_leg, 
+                                     y = prison_BWratio)) + 
   geom_point() + 
   geom_smooth( method = "lm", se = FALSE) +
   scale_x_log10() + 
-  labs( x = "Average Percent African Americans in State Legislatures",
-        y = "Average Black/White Incarceration Ratio",
+  labs( x = "Percent African Americans in State Legislatures",
+        y = "Black/White Incarceration Ratio",
         title = "Relationship Between Black State Legislatures and Black/White Incarceration by State",
         subtitle = "Across 50 US States from 1980-2010", 
         caption = "Source: Hawes, Daniel, 2017") +
@@ -101,11 +112,11 @@ Data_Visual_1.6
 
 ```
 
-Calculating Correlation (Between Avg State Legislature + Avg Black/White Incarceration)
+Calculating Correlation (Between Percent Black State Legislature and Black/White Incarceration Ratio)
 
 ```{r}
 
-cor(state_summary$avg_blk_leg, state_summary$avg_prison_BWratio,
+cor(state_summary$blk_leg, state_summary$prison_BWratio,
     use = "pairwise")
 
 
@@ -113,30 +124,12 @@ cor(state_summary$avg_blk_leg, state_summary$avg_prison_BWratio,
 
 ```
 
-The correlation between the average percentage of African Americans in State Legislatures and the Average Black/White Incarceration Ratio is approximately -0.206. This means that there is a very weak negative correlation between the two variables. In other words, as the amount of African Americans in State Legislatures increases, the Average Black/White Incarceration Ratio tends to decrease, however there is significant variability in the data such that this trend is not strong. 
+The correlation between the percentage of African Americans in State Legislatures and the Black/White Incarceration Ratio is approximately -0.146. This means that there is a very weak negative correlation between the two variables. In other words, as the amount of African Americans in State Legislatures increases, the Average Black/White Incarceration Ratio tends to decrease, however there is significant variability in the data such that this trend is not strong. 
 
 
-After getting this value, I conducted multiple regressions to hold the average percentage of the black population of each state constant as well as the diversity index. 
+After getting this value, I conducted a multiple regression to hold the state's diversity index constant. This was my approach because it is plausible that the amount of diversity in a given state would impact the ratio of Black people incarcerated compared to white --- which would vary across states. 
 
 
-
-
-```{r}
-
-statesummary_blkpop <- FinalProjectData |> 
-  group_by(statename) |> 
-  summarize( 
-    avg_blk_leg = mean(blk_leg, na.rm = TRUE),
-    avg_prison_BWratio = mean(prison_BWratio, na.rm = TRUE), 
-    avg_pop_pctblk = mean(pop_pctblk, na.rm = TRUE), 
-    avg_racialdiversity = mean(racialdiversity, na.rm = TRUE)
-  ) |> 
-  drop_na(avg_blk_leg, avg_prison_BWratio, avg_pop_pctblk, avg_racialdiversity)
-
-statesummary_blkpop
-
-
-```
 
 
 
@@ -145,71 +138,41 @@ statesummary_blkpop
 
 
 
-pop.fit <- lm(avg_prison_BWratio ~ avg_blk_leg +  avg_pop_pctblk + avg_racialdiversity, 
-              data = statesummary_blkpop)
+pop.fit <- lm(prison_BWratio ~ blk_leg + racialdiversity, 
+              data = state_summary )
 
 summary(pop.fit)
 
-
-
-```
-
-
-The intercept ( 9.8304) represents the estimated average black/white prison ratio when the independent variables are held at 0. 
-
-The avg_blk_leg coefficient of (0.3161) represents the estimated change in the average black/white prison ratio for a percentage average increase in the black state legislature. 
-
-The avg_pop_pctblk coefficient of (-0.2303) represents the estimated change in the average black/white prison ratio for a percentage average increase in the black population of a state. 
-
-The avg_racialdiversity coefficient of (-5.3025) represents the estimated change in the average black/white prison ratio for an average unit increase in the racial diversity index of a state. 
-
-None of the coefficients are statistically significant given that their p-vales are not less than 0.05.
-
-
-
-Since the relationship between avg_blk_leg and black/white incarceration ratio flipped in the multiple regression, it led me to suspect that the flip was due to the avg_blk_leg  and avg_pop_pctblk variables being highly correlated. To test this theory, I tested the correlation between avg_blk_leg and avg_pop_pctblk. 
-
-
-```{r}
-cor(statesummary_blkpop$avg_blk_leg, statesummary_blkpop$avg_pop_pctblk,
-    use = "pairwise")
-```
-
-
-
-After running a correlation test between the Average Percentage of Black State Legislatures and the Average Black population percentage, my suspicion that the values were highly correlated was confirmed. The correlation between the two variables is strong and positive (0.9395601). As such, I wanted to evaluate whether there was a synergistic effect between "avg_pop_pctblk" and "avg_racialdiversity". To do so, I ran another multiple regression --- this time, however, I multiplied "avg_pop_pctblk" and "avg_racialdiversity". 
-
-
-```{r}
-
-pop.fit_2 <- lm(avg_prison_BWratio ~ avg_blk_leg :  avg_pop_pctblk + avg_racialdiversity, 
-              data = statesummary_blkpop)
-
-summary(pop.fit_2)
-
-
+modelsummary::modelsummary(pop.fit, statistic = c("s.e. = {std.error}",
+"p = {p.value}"))
 
 ```
+ 
+The intercept ( 9.37362) represents the estimated average black/white prison ratio when the independent variables are held at 0. 
+
+The "blk_leg" [Percent of Black State Legislatures] coefficient of (-0.03708) represents the estimated change in the average black/white prison ratio for a percentage average increase in the black state legislature. That is, for every percentage increase in Black Legislature, there is an estimated decrease of 0.03708 points in the Black/White incarceration ratio in states. Contrary to what my initial hypothesis predicted, this relationship is not very statistically significant. This is because the p-value (0.0601) for the "blk-leg" coefficient is not less than 0.05. It is noteworthy that the p-value is less than 0.1.  
 
 
-Based on the multiple regression, the coefficient for the interaction term is not statistically significant. This is because the p-value (0.229) is greater than 0.05. Thus, despite the variables (avg_blk_leg and avg_pop_pctblk) being highly correlated, the data does not suggest a synergistic effect. However, based on this multiple regression the coefficients can be evaluated as such: 
+The "racialdiversity" [Racial Diversity Index] coefficient of (-3.84840) represents the estimated change in the average black/white prison ratio for every unit increase in the racial diversity index. That is, for every unit increase in the racial diversity index, there is an estimated decrease of -3.84840 points in the Black/White incarceration ratio in states. This relationship is statistically significant. This is because the p-value of the coefficient (4.99e-07) is less than 0.05. 
 
-The intercept coefficient (9.623729) represents the estimated average black/white prison ratio when the independent variables are held at 0.  
-The avg_racialdiversity coefficient (-4.032670) represents the estimated average black/white prison ratio increase when the racial diversity index increases by one unit. 
-
-The avg_blk_leg:avg_pop_pctblk coefficient (-0.004002) represents the estimated average black/white prison ratio increase when both avg_blk_leg and avg_pop_pctblk are present/ together increase by a unit.   
-
-None of the values are statistically significant. This means that we cannot conclude that the null hypothesis is rejected -- that is, we fail to reject the null hypothesis --- that the selected variables (Average Black State Legislatures & Average Black Population Percentage, Average Racial Diversity Index) have no effect on average Black/White prison ratios. 
-
-
+This information leads me to conclude that perhaps racial diversity is a better indicator for trends in Black/White prison ratios than the percentage of Black Legislature. This is because the statistical significance in the prior is much stronger. 
 
 
 
-Conclusion: 
 
-Ultimately, the data demonstrates that there is a weak negative correlation between Black representation in the state legislature and Black/White prison ratios. When I ran the multiple regression table to control for the Black population and Diversity Index, the coefficients were not statistically significant. This is because the p-values were all less than 0.05. 
 
-With this understanding, we cannot interpret the data as causal. That is, the presence of more Black State Legislatures does not cause a decrease in Black/White incarceration ratios. Instead, the data indicates that there is a merely weak correlation. In addition to what has already been considered, a potential confounding variable is the ideology of voters in a given state. That is, if voters are more “tough on crime” in one state, it is likely to impact the amount of people incarcerated on the whole. If the voters in this same state also hold racist or anti-diversity sentiments, it is likely that they have larger Black/White incarceration ratios. This is because voters elect officials who create policy that is supported by their constituents. This is something that the current data I am working with, cannot account for and thus, a limitation. 
+## Conclusion: 
+
+Ultimately, the data demonstrates that there is a weak negative correlation between Black representation in the state legislature and Black/White prison ratios. This is based on the correlation value being "-0.1463755". Which, while negative, is not very strong. This runs contrary to my initial hypothesis.  
+
+
+When I ran the multiple regression table to control for the Diversity Index of states, the subsequent coefficients were statistically significant. Intuitively, it makes sense that an increase in diversity index would have a negative relationship with Black/White incarceration ratios. This is because more diversity means more heterogeneity in a given state's populace, and thus, based on the data -- a diversity in the races of people who end up incarcerated in prison. 
+
+
+With this understanding, we cannot interpret the relationship... (ADD) data as causal. That is, the presence of more Black State Legislatures does not cause a decrease in Black/White incarceration ratios. Instead, the data indicates that there is a fairly weak correlation. Similar understandings can be applied to the relationship between racial diversity and Black/White prison ratios. Though the two variables are correlated and the relationship is statistically significant, this does not mean causation.
+
+
+In addition to what has already been considered, a potential confounding variable is the ideology of voters in a given state. That is, if voters are more “tough on crime” in one state, it is likely to impact the amount of people incarcerated on the whole. If the voters in this same state also hold racist or anti-diversity sentiments, it is likely that they have larger Black/White incarceration ratios. This is because voters elect officials who create policy that is supported by their constituents. This is something that the current data I am working with, cannot account for and thus, a limitation. 
 
 Given more time and money to conduct this research, I would have liked to find data about the dominant voter ideologies of each state I was working with. I could leverage this information to control for the prior-mentioned confounding variables, or even observe beyond speculation what the relationship between voter ideology and Black/white incarceration actually is. 
 
