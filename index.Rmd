@@ -17,7 +17,7 @@ The question that my final project will seek to answer is “What is the relatio
 
 This is my hypothesis based on my assumption that states with more Black elected officials will have less tangible prejudice against Black populations – given that they are being elected into office. That assumption then leads me to believe that Black populations would not be over-policed in comparison to white populations within the state. 
 
-This is a very important area of research given that in the status quo, Black people are over-policed compared to their white counterparts. This project may present a starting point for potential solvency. That is, if this query determines that there is a significant and strong negative correlation between Black representation in the state legislature and Black/White prison ratios then it would be important to uncover why. With an understanding that correlation does not mean causation, additional research and tests could be conducted to determine whether electing more Black representation to state legislature might meaningful decrease the Black prison population in America. 
+This is a very important area of research given that in the status quo, Black people are over-policed compared to their white counterparts. This project may present a starting point for potential solvency. That is, if this query determines that there is a significant and strong negative correlation between Black representation in the state legislature and Black/White prison ratios then it would be important to uncover why. With an understanding that correlation does not mean causation, additional research and tests could be conducted to determine whether electing more Black representation to state legislature might meaningfully decrease the Black prison population in America. 
 
 To test my hypothesis, I used data published by Daniel Hawes entitled “Replication Data for: Social Capital, Racial Context and Incarcerations in the American States."
 
@@ -148,7 +148,7 @@ modelsummary::modelsummary(pop.fit, statistic = c("s.e. = {std.error}",
 
 ```
  
-The intercept ( 9.37362) represents the estimated average black/white prison ratio when the independent variables are held at 0. 
+The intercept ( 9.37362) represents the estimated black/white prison ratio when the independent variables are held at 0. 
 
 The "blk_leg" [Percent of Black State Legislatures] coefficient of (-0.03708) represents the estimated change in the black/white prison ratio for a percentage average increase in the black state legislature. That is, for every percentage increase in Black Legislature, there is an estimated decrease of 0.03708 points in the Black/White incarceration ratio in states. Contrary to what my initial hypothesis predicted, this relationship is not very statistically significant. This is because the p-value (0.0601) for the "blk-leg" coefficient is not less than 0.05. It is noteworthy that the p-value is less than 0.1.  
 
