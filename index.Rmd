@@ -1,15 +1,11 @@
 ---
 title: "Gov 50 Final Project"
 author: "Ashley Adirika"
-description: "My final project"
+description: "The Relationship between the Amount of Black State Legislatures and the Black/White Prison Ratio"
 output:
   distill::distill_article:
     self_contained: false
 ---
-
-# The Relationship between the Amount of Black State Legislatures and the Black/White Prison Ratio 
-
-
 
 ## Introduction: 
 
@@ -174,6 +170,7 @@ We cannot interpret the relationship between the amount of Black State Legislatu
 In addition to what has already been considered, a potential confounding variable is the ideology of voters in a given state. That is, if voters are more “tough on crime” in one state, it is likely to impact the amount of people incarcerated on the whole. If the voters in this same state also hold racist or anti-diversity sentiments, it is likely that they have larger Black/White incarceration ratios. This is because voters elect officials who create policy that is supported by their constituents. This is something that the current data I am working with, cannot account for and thus, a limitation. 
 
 Given more time and money to conduct this research, I would have liked to find data about the dominant voter ideologies of each state I was working with. I could leverage this information to control for the prior-mentioned confounding variables, or even observe beyond speculation what the relationship between voter ideology and Black/white incarceration actually is. 
+
 
 
 
